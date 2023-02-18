@@ -6,16 +6,40 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ManageExpenses from './screens/ManageExpenses';
 import RecentExpenses from './screens/RecentExpenses';
 import AllExpenses from './screens/AllExpenses';
-
+import { GlobalStyles } from './constants/styles';
+import {Ionicons} from "@expo/vector-icons"
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
 
 function ExpenseOverview() {
-  return <BottomTabs.Navigator>
-    <BottomTabs.Screen name='RecentExpense' component={RecentExpenses} />
-    <BottomTabs.Screen name='AllExpense' component={AllExpenses} />
+  return <BottomTabs.Navigator
+  screenOptions={{
+    headerStyle:{backgroundColor:GlobalStyles.colors.primary500},
+    headerTintColor:'white',
+    tabBarStyle:{backgroundColor:GlobalStyles.colors.primary500},
+    tabBarActiveTintColor:GlobalStyles.colors.accent500
+  }}
+  >
+    <BottomTabs.Screen 
+    name='RecentExpense' 
+    component={RecentExpenses} 
+    options={{
+      title:'Recent Expenses',
+      tabBarLabel:'Recent',
+      tabBarIcon:({color,size})=> <Ionicons name="hourglass" size={size} color={color}/>
+    }}
+    />
+    <BottomTabs.Screen 
+    name='AllExpense' 
+    component={AllExpenses} 
+    options={{
+      title:'All Expenses',
+      tabBarLabel:'All Expenses',
+      tabBarIcon:({color,size})=> <Ionicons name="calendar" size={size} color={color}/>
+    }}
+    />
   </BottomTabs.Navigator>
 }
 
@@ -24,11 +48,11 @@ function ExpenseOverview() {
 export default function App() {
   return (
     <>
-      <StatusBar style='light' />
+      <StatusBar style='auto' />
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name='ExpenseOverview' component={ExpenseOverview} options={{headerShown:false}} />
           <Stack.Screen name='ManageExpense' component={ManageExpenses} />
-          <Stack.Screen name='ExpenseOverview' component={ExpenseOverview} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
