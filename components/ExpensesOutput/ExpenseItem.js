@@ -23,7 +23,7 @@ export default function ExpenseItem({id,description,amount,date}) {
                     <Text style={styles.textBase}>{getFormatDate(date)}</Text>
                 </View>
                 <View style={styles.amountConatiner}>
-                    <Text style={styles.amount}>{amount.toFixed(2)}</Text>
+                    <Text style={styles.amount}>${amount.toFixed(2)}</Text>
                 </View>
             </View>
         </Pressable>
