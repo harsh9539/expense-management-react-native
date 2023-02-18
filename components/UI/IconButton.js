@@ -4,11 +4,11 @@ import {Ionicons} from "@expo/vector-icons"
 
 
 
-export default function IconButton({name,size,color,onPress}) {
+export default function IconButton({icon,size,color,onPress}) {
     return (
         <Pressable onPress={onPress} style={({pressed})=> pressed && styles.pressed}>
             <View style={styles.buttonContainer}>
-                <Ionicons name={name} size={size} color={color}/>
+                <Ionicons name={icon} size={size} color={color}/>
             </View>
         </Pressable>
     )
