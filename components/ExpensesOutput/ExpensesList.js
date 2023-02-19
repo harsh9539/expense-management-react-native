@@ -11,10 +11,11 @@ function renderExpenseItem(itemData){
 
 
 export default function ExpensesList({expenses}) {
+    console.log(expenses)
     return (
         <FlatList
         data={expenses}
-        keyExtractor={(item)=>item.id}
+        keyExtractor={(item)=>{item.id}}
         renderItem={renderExpenseItem}
         />
     )

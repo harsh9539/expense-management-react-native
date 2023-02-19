@@ -7,7 +7,6 @@ import { GlobalStyles } from '../../constants/styles'
 
 export default function ExpensesOutput({ expenses, expensesPeriod, fallBackText }) {
     let content = <Text style={styles.infoText}>{fallBackText}</Text>;
-
     if (expenses.length > 0) {
         content = <ExpensesList expenses={expenses} />
 

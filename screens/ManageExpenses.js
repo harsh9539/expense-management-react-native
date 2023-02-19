@@ -5,21 +5,24 @@ import { GlobalStyles } from '../constants/styles';
 import Button from '../components/UI/Button';
 import { ExpensesContext } from '../store/expenses-context';
 import ExpenseForm from '../components/ManageExpense/ExpenseForm';
+import { storeExpense, deleteExpenseHandle,updateExpenseHdandler } from '../util/http';
 
 export default function ManageExpenses({ route, navigation }) {
-    // console.log(route);
-    const { expenses,addExpense, deleteExpense, updateExpense } = useContext(ExpensesContext);
+    // console.log(route.params);
+    const { expenses, addExpense, deleteExpense, updateExpense } = useContext(ExpensesContext);
     const editedExpenseId = route.params?.expenseId;
+    console.log("edited Expense id " + editedExpenseId);
     const isEditing = !!editedExpenseId;
 
-    const selectedExpense = expenses.find(expense=>expense.id === editedExpenseId);
+    const selectedExpense = expenses.find(expense => expense.id === editedExpenseId);
     useLayoutEffect(() => {
         navigation.setOptions({
             title: isEditing ? 'Edit Expense' : "Add Expense"
         });
     }, [navigation, isEditing]);
-    function deleteExpenseHandler() {
+    async function deleteExpenseHandler() {
         console.log(editedExpenseId)
+        await deleteExpenseHandle(editedExpenseId)
         deleteExpense(editedExpenseId);
         navigation.goBack();
 
@@ -27,19 +30,24 @@ export default function ManageExpenses({ route, navigation }) {
     function cancelHandler() {
         navigation.goBack();
     }
-    function confirmHandler(expenseData) {
-        if (isEditing) updateExpense(editedExpenseId,expenseData); 
-        else addExpense(expenseData);
+    async function confirmHandler(expenseData) {
+        if (isEditing) {
+            updateExpense(editedExpenseId, expenseData);
+            await updateExpenseHdandler(editedExpenseId,expenseData);
+        }
+        else {
+            const id = await storeExpense(expenseData);
+            addExpense({ ...expenseData, id: id });
+        }
         navigation.goBack();
-
     }
     return (
         <View style={styles.container}>
-            <ExpenseForm 
-            onCancel={cancelHandler} 
-            onSubmit={confirmHandler} 
-            isEditing={isEditing}
-            defaultValues={selectedExpense}
+            <ExpenseForm
+                onCancel={cancelHandler}
+                onSubmit={confirmHandler}
+                isEditing={isEditing}
+                defaultValues={selectedExpense}
             />
             {isEditing &&
                 <View style={styles.deleteContainer}>
