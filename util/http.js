@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const BASE_URL = 'https://react-native-project-61d0c-default-rtdb.firebaseio.com/'
+const BASE_URL = 'https://expense-manage-dff8f-default-rtdb.firebaseio.com/'
 
 
 
@@ -15,6 +15,7 @@ export async function storeExpense(expenseData) {
 
 export async function fetchExpenses() {
     const response = await axios.get(`${BASE_URL}expenses.json`);
+    // console.log(response)
     const expenses = [];
     for (const key in response.data) {
         const { amount, date, description } = response.data[key];
