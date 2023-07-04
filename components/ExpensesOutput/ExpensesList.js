@@ -16,6 +16,7 @@ export default function ExpensesList({expenses}) {
         <FlatList
         data={expenses}
         keyExtractor={(item)=>{item.id}}
+        key={(item)=>item.id}
         renderItem={renderExpenseItem}
         />
     )

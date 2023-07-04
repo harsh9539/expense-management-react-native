@@ -20,7 +20,7 @@ export default function ExpenseItem({id,description,amount,date}) {
         >
             <View style={styles.expenseItem}>
                 <View>
-                    <Text style={[styles.textBase,styles.description]}>{description}</Text>
+                    <Text ellipsizeMode='tail' numberOfLines={1} style={[styles.textBase,styles.description]}>{ description.length > 30 ? description.slice(0,20) + "..." : description}</Text>
                     <Text style={styles.textBase}>{getFormatDate(date)}</Text>
                 </View>
                 <View style={styles.amountConatiner}>

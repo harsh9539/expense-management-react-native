@@ -11,7 +11,7 @@ export default function Input({label,style,inValid,...textInput}) {
     return (
         <View style={[styles.inputContainer,style]}>
             <Text style={[styles.label, inValid && styles.inValidLabel]}>{label}</Text>
-            <TextInput style={[inputStyles,inValid && styles.inValidInput]} {...textInput}/>
+            <TextInput placeholderTextColor={"white"} style={[inputStyles,inValid && styles.inValidInput]} {...textInput}/>
         </View>
     )
 }
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     },
     label:{
         fontSize:12,
-        color:GlobalStyles.colors.primary100,
+        color:'white',
         marginBottom:4
     },
     input:{
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         padding:6,
         borderRadius:6,
         fontSize:18,
-        color:GlobalStyles.colors.primary700
+        color:'white'
     },
     inputMultiline:{
         minHeight:100,

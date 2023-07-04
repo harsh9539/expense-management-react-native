@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const BASE_URL = 'https://expense-manage-dff8f-default-rtdb.firebaseio.com/'
+const BASE_URL = 'https://expense-management-b95c9-default-rtdb.firebaseio.com/'
 
 
 
@@ -11,6 +11,7 @@ export async function storeExpense(expenseData) {
     const id = response.data.name;
     console.log(response.data.name);
     return id;
+    
 }
 
 export async function fetchExpenses() {
